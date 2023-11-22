@@ -1,6 +1,6 @@
 {
   "name": "demo-cli-kedar",
-  "version": "2.0.3",
+  "version": "2.0.5",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -16,7 +16,7 @@
     "esbuild": "^0.19.7"
   },
   "bin": {
-    "demo-doc": "./cli2.mjs"
+    "demo-doc": "./cli.mjs"
   }
 }
 

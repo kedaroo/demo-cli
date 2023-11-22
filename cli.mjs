@@ -6,10 +6,8 @@ import { execSync } from 'child_process';
 import esbuild from 'esbuild';
 import mdx from '@mdx-js/esbuild'
 import { join, resolve } from 'path';
-import webpackConfig from './webpack.config.js'
-import indexJs from './index.js'
-import indexHtml from './indexHtml.js'
 import { createRouterFile } from './create-router-imports.mjs'
+import { indexHtml, indexJs, webpackConfig, gitignore } from './boilerplate-files.mjs'
 
 program
   .command('start')
@@ -21,11 +19,15 @@ program
         console.error(`Error executing npm script: ${error}`);
         return;
       }
-
       console.log('Created package.json')
+    });
 
-      // console.log(`stdout: ${stdout}`);
-      // console.error(`stderr: ${stderr}`);
+    writeFileSync(join(resolve(), 'dist', '.gitignore'), gitignore, err => {
+      if (err) {
+        console.error('Error writing to file:', err);
+        return;
+      }
+      console.log(`Content written to ${outputFile}`);
     });
 
     execSync(`cd dist && npm i react react-router-dom react-dom`, (error, stdout, stderr) => {
@@ -33,11 +35,7 @@ program
         console.error(`Error executing npm script: ${error}`);
         return;
       }
-
       console.log('Install react, react-router-dom, react-dom')
-
-      // console.log(`stdout: ${stdout}`);
-      // console.error(`stderr: ${stderr}`);
     });
 
     execSync(`cd dist && npm i -D @babel/core @babel/preset-env @babel/preset-react babel-loader html-webpack-plugin webpack webpack-cli webpack-dev-server`, (error, stdout, stderr) => {
@@ -45,11 +43,7 @@ program
         console.error(`Error executing npm script: ${error}`);
         return;
       }
-
       console.log('Install dev dependencies')
-
-      // console.log(`stdout: ${stdout}`);
-      // console.error(`stderr: ${stderr}`);
     });
 
     execSync(`cd dist && mkdir src`, (error, stdout, stderr) => {
@@ -57,11 +51,7 @@ program
         console.error(`Error executing npm script: ${error}`);
         return;
       }
-
       console.log('Install dev dependencies')
-
-      // console.log(`stdout: ${stdout}`);
-      // console.error(`stderr: ${stderr}`);
     });
 
 
@@ -70,7 +60,6 @@ program
         console.error('Error writing to file:', err);
         return;
       }
-
       console.log(`Content written to ${outputFile}`);
     });
 
@@ -79,7 +68,6 @@ program
         console.error('Error writing to file:', err);
         return;
       }
-
       console.log(`Content written to ${outputFile}`);
     });
 
@@ -88,7 +76,6 @@ program
         console.error('Error writing to file:', err);
         return;
       }
-
       console.log(`Content written to ${outputFile}`);
     });
 
@@ -110,11 +97,7 @@ program
         console.error(`Error executing npm script: ${error}`);
         return;
       }
-
       console.log('run webpack-dev-server')
-
-      // console.log(`stdout: ${stdout}`);
-      // console.error(`stderr: ${stderr}`);
     });
   });
 
