@@ -1,6 +1,6 @@
 {
   "name": "demo-cli-kedar",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -11,9 +11,7 @@
   "author": "Kedar",
   "license": "ISC",
   "peerDependencies": {
-    "commander": "^11.1.0"
-  },
-  "devDependencies": {
+    "commander": "^11.1.0",
     "@mdx-js/esbuild": "^3.0.0",
     "esbuild": "^0.19.7"
   },
