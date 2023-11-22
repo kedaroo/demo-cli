@@ -7,7 +7,7 @@ import esbuild from 'esbuild';
 import mdx from '@mdx-js/esbuild'
 import { join, resolve } from 'path';
 import { createRouterFile } from './create-router-imports.mjs'
-import { indexHtml, indexJs, webpackConfig, gitignore } from './boilerplate-files.mjs'
+import { indexHtml, indexJs, gitignore } from './boilerplate-files.mjs'
 
 program
   .command('start')
@@ -30,20 +30,12 @@ program
       console.log(`Content written to ${outputFile}`);
     });
 
-    execSync(`cd dist && npm i react react-router-dom react-dom`, (error, stdout, stderr) => {
+    execSync(`cd dist && npm i react react-router-dom react-dom kedar-scripts`, (error, stdout, stderr) => {
       if (error) {
         console.error(`Error executing npm script: ${error}`);
         return;
       }
       console.log('Install react, react-router-dom, react-dom')
-    });
-
-    execSync(`cd dist && npm i -D @babel/core @babel/preset-env @babel/preset-react babel-loader html-webpack-plugin webpack webpack-cli webpack-dev-server`, (error, stdout, stderr) => {
-      if (error) {
-        console.error(`Error executing npm script: ${error}`);
-        return;
-      }
-      console.log('Install dev dependencies')
     });
 
     execSync(`cd dist && mkdir src`, (error, stdout, stderr) => {
@@ -52,15 +44,6 @@ program
         return;
       }
       console.log('Install dev dependencies')
-    });
-
-
-    writeFileSync(join(resolve(), 'dist', 'webpack.config.js'), webpackConfig, err => {
-      if (err) {
-        console.error('Error writing to file:', err);
-        return;
-      }
-      console.log(`Content written to ${outputFile}`);
     });
 
     writeFileSync(join(resolve(), 'dist', 'src', 'index.js'), indexJs, err => {
@@ -92,7 +75,7 @@ program
 
     createRouterFile()
 
-    execSync(`cd dist && npx webpack-dev-server --mode development --open`, (error, stdout, stderr) => {
+    execSync(`cd dist/node_modules/kedar-scripts && npx webpack-dev-server --mode development --open`, (error, stdout, stderr) => {
       if (error) {
         console.error(`Error executing npm script: ${error}`);
         return;
