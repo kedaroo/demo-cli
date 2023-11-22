@@ -8,7 +8,7 @@ export const createRouterFile = () => {
 
   const fileNames = []
   fs.readdirSync(folderPath)
-    .filter(file => file.endsWith('.mdx'))
+    .filter(file => file.endsWith('.js'))
     .map(file => {
       const fileNameWithoutExtension = parse(file).name;
       const camelCaseName = convertToCamelCase(fileNameWithoutExtension);
