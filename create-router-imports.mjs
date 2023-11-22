@@ -8,6 +8,7 @@ export const createRouterFile = () => {
 
   const fileNames = []
   fs.readdirSync(folderPath)
+    .filter(file => file.endsWith('.mdx'))
     .map(file => {
       const fileNameWithoutExtension = parse(file).name;
       const camelCaseName = convertToCamelCase(fileNameWithoutExtension);
