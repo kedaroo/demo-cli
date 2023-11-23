@@ -17,7 +17,6 @@ export const createRouterFile = () => {
 
   const newJSFileContent = getNewJSFileContent(fileNames);
 
-
   fs.writeFileSync(outputFile, newJSFileContent, err => {
     if (err) {
       console.error('Error writing to file:', err);

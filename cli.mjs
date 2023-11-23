@@ -7,7 +7,7 @@ import esbuild from 'esbuild';
 import mdx from '@mdx-js/esbuild'
 import { join, resolve } from 'path';
 import { createRouterFile } from './create-router-imports.mjs'
-import { indexHtml, indexJs, gitignore } from './boilerplate-files.mjs'
+import { indexJs, gitignore } from './boilerplate-files.mjs'
 
 program
   .command('start')
@@ -47,14 +47,6 @@ program
     });
 
     writeFileSync(join(resolve(), 'dist', 'src', 'index.js'), indexJs, err => {
-      if (err) {
-        console.error('Error writing to file:', err);
-        return;
-      }
-      console.log(`Content written to ${outputFile}`);
-    });
-
-    writeFileSync(join(resolve(), 'dist', 'src', 'index.html'), indexHtml, err => {
       if (err) {
         console.error('Error writing to file:', err);
         return;
