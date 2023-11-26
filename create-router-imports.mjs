@@ -1,10 +1,13 @@
 import { join, parse, resolve } from 'path';
 import * as fs from 'fs'
+import { tmpdir } from 'os'
 
-export const createRouterFile = () => {
-  const folderPath = join(resolve(), 'dist', 'src', 'mdx-dist')
+const tempDir = join(tmpdir(), 'demo-doc-dist');
 
-  const outputFile = join(resolve(), 'dist', 'src', 'router.js')
+export const createRouterFile = (build) => {
+  const folderPath = join(build ? resolve() : tempDir, 'dist', 'src', 'mdx-dist')
+
+  const outputFile = join(build ? resolve() : tempDir, 'dist', 'src', 'router.js')
 
   const fileNames = []
   fs.readdirSync(folderPath)
