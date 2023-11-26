@@ -172,7 +172,7 @@ program
         console.log('run webpack-dev-server')
       });
 
-      rmSync(join(resolve(), 'dist'))
+    rmSync(join(resolve(), 'dist'), { recursive: true })
   });
 
 
