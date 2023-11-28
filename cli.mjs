@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { program } from 'commander';
-import { readdirSync, writeFileSync, existsSync, mkdirSync, rmSync } from 'fs';
+import { readdirSync, writeFileSync, existsSync, mkdirSync, rmSync, renameSync } from 'fs';
 import { execSync } from 'child_process';
 import esbuild from 'esbuild';
 import mdx from '@mdx-js/esbuild'
@@ -111,7 +111,7 @@ program
       console.log(`Content written to ${outputFile}`);
     });
 
-    execSync(`cd dist && npm i react react-router-dom react-dom kedar-scripts`,
+    execSync(`cd dist && npm i react react-router-dom react-dom kedar-scripts react-snap`,
       { stdio: 'inherit' },
       (error, stdout, stderr) => {
         if (error) {
@@ -171,6 +171,18 @@ program
         }
         console.log('run webpack-dev-server')
       });
+
+    execSync(`cd dist && npx react-snap`,
+      { stdio: 'inherit' },
+      (error, stdout, stderr) => {
+        if (error) {
+          console.error(`Error executing npm script: ${error}`);
+          return;
+        }
+        console.log('run webpack-dev-server')
+      });
+
+    renameSync(join(resolve(), 'dist', 'build'), join(resolve(), 'build'))
 
     rmSync(join(resolve(), 'dist'), { recursive: true })
   });

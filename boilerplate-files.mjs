@@ -1,10 +1,11 @@
-export const indexJs = `import * as React from "react";
-import * as ReactDOM from "react-dom/client";
+export const indexJs = `import { createRoot } from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
+import React, { Suspense } from 'react';
 import { router } from "./router";
 
-ReactDOM
-  .createRoot(document.getElementById("root"))
-  .render(<RouterProvider router={router} />);`
+const rootElement = document.getElementById("root");
+const root = createRoot(rootElement);
+root.render(<Suspense fallback={'Loading'}><RouterProvider router={router} /></Suspense>);`
+
 
 export const gitignore = `node_modules`
